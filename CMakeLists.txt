@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(sweepre)
+project(sweepre LANGUAGES CXX)
 
 set(SWEEPRE_LIB ${PROJECT_NAME})
 
