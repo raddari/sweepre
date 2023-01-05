@@ -1,0 +1,24 @@
+Diagnostics:
+  ClangTidy:
+    Add:
+      [
+        "bugprone-*",
+        "cppcoreguidelines-*",
+        "misc-*",
+        "modernize-*",
+        "performance-*",
+        "readability-*",
+      ]
+    Remove:
+      [
+        "cppcoreguidelines-avoid-magic-numbers",
+        "cppcoreguidelines-owning-memory",
+        "readability-identifier*",
+        "misc-unused-parameters",
+        "readability-magic-numbers",
+      ]
+    CheckOptions:
+      readability-implicit-bool-conversion.AllowPointerConditions: true
+
+InlayHints:
+  Enabled: Yes

@@ -1,0 +1,16 @@
+---
+BasedOnStyle: LLVM
+AlignAfterOpenBracket: BlockIndent
+AlignConsecutiveBitFields:
+  Enabled: true
+  AcrossComments: true
+AlignEscapedNewlines: Left
+AllowShortFunctionsOnASingleLine: Empty
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBinaryOperators: NonAssignment
+ColumnLimit: 120
+CommentPragmas: ""
+MaxEmptyLinesToKeep: 2
+PointerAlignment: Left
+SpaceAfterCStyleCast: true
+TabWidth: 2
