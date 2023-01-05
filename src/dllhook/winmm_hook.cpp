@@ -1,7 +1,7 @@
 #include "winmm_hook.h"
 
 
-using FnPlaySoundW = BOOL (WINAPI*)(LPCWSTR, HMODULE, DWORD);
+using FnPlaySoundW = BOOL(WINAPI*)(LPCWSTR, HMODULE, DWORD);
 
 static HINSTANCE hSweepreLib{nullptr};
 static FnPlaySoundW forward_PlaySoundW{nullptr};
