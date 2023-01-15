@@ -33,6 +33,7 @@ static auto apply_hooks() -> void {
   };
 
   hook(0x1003950, re::show_error_dialog);
+  hook((u32) re::exe::modify_flag_counter, re::modify_flag_counter);
 }
 
 auto WINAPI DllMain(HINSTANCE hInstance, DWORD fwdReason, LPVOID lpvReserved) -> BOOL {

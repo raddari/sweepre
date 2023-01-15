@@ -5,6 +5,11 @@
 #include <array>
 
 
+auto WINAPI re::modify_flag_counter(i32 amount) -> void {
+  re::exe::flag_counter += amount;
+  re::exe::draw_flag_counter();
+}
+
 auto WINAPI re::show_error_dialog(UINT error_id) -> void {
   WCHAR text[128];
   WCHAR caption[128];
