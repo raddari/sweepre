@@ -1,15 +1,19 @@
 ---
 BasedOnStyle: LLVM
 AlignAfterOpenBracket: BlockIndent
-AlignConsecutiveBitFields:
-  Enabled: true
-  AcrossComments: true
-AlignEscapedNewlines: Left
+AlignConsecutiveBitFields: AcrossComments
 AllowShortFunctionsOnASingleLine: Empty
 AlwaysBreakTemplateDeclarations: Yes
 BreakBeforeBinaryOperators: NonAssignment
 ColumnLimit: 120
-CommentPragmas: ""
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: ^"
+    Priority: 1
+    CaseSensitive: true
+  - Regex: ^<
+    Priority: 2
+    CaseSensitive: true
 MaxEmptyLinesToKeep: 2
 PointerAlignment: Left
 SpaceAfterCStyleCast: true
