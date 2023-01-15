@@ -1,7 +1,6 @@
 #include "retypes.hpp"
 
-#include <concepts>
-#include <iomanip>
+#include <cstdio>
 #include <iostream>
 #include <windows.h>
 
@@ -9,19 +8,17 @@
 namespace re {
 
 template <typename Address, typename HookFn>
-  requires std::is_convertible_v<Address, std::uintptr_t>
 auto hook_function(Address target, HookFn replacement) -> bool {
-  using std::uintptr_t;
 
 #pragma pack(push, 1)
   struct HookLayout {
     const u8 jmp{0xe9};
-    uintptr_t address{};
+    u32 address{};
   };
 #pragma pack(pop, 1)
   static_assert(sizeof(HookLayout) == 5, "Hook struct not packed");
 
-  auto fn_start{reinterpret_cast<uintptr_t>(replacement) - target - 5};
+  auto fn_start{reinterpret_cast<u32>(replacement) - target - 5};
   auto hook = HookLayout{.address{fn_start}};
   auto* handle = GetCurrentProcess();
   return WriteProcessMemory(handle, reinterpret_cast<LPVOID>(target), &hook, sizeof(hook), nullptr);
@@ -35,17 +32,11 @@ auto WINAPI load_string(UINT id, LPWSTR buffer, int max_size) -> void {
 
 static auto apply_hooks() -> void {
   auto hook = [](auto address, auto replacement) -> void {
-    using namespace std;
-    auto save_flags = ios::fmtflags{cout.flags()};
-    cout << hex << showbase << setfill('0') << setw(10);
-
     if (re::hook_function(address, replacement)) {
-      cout << "$ function hooked: " << address << " =>> " << reinterpret_cast<std::uintptr_t>(replacement) << "\n";
+      std::printf("$ function hooked: %#08x =>> %#08x\n", address, reinterpret_cast<u32>(replacement));
     } else {
-      cout << "! hook failed: " << address << "\n";
+      std::printf("! hook failed: %#08x\n", address);
     }
-
-    cout.flags(save_flags);
   };
 
   hook(0x010039e7, re::load_string);
@@ -55,7 +46,9 @@ auto WINAPI DllMain(HINSTANCE hInstance, DWORD fwdReason, LPVOID lpvReserved) ->
   switch (fwdReason) {
   case DLL_PROCESS_ATTACH:
     AllocConsole();
-    std::freopen("CONOUT$", "wb", stdout);
+    std::freopen("CONIN$", "r", stdin);
+    std::freopen("CONOUT$", "w", stdout);
+    std::freopen("CONOUT$", "w", stderr);
     std::cout << "DLL Hooked!\n";
     apply_hooks();
     break;
