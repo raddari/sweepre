@@ -3,6 +3,7 @@
 #include "globals.hpp"
 
 #include <array>
+#include <cstdlib>
 #include <mmsystem.h>
 
 
@@ -101,7 +102,7 @@ auto WINAPI re::stop_sounds() -> i32 {
   return (success != 0) + 2;
 }
 
-auto WINAPI re::play_sound(int sound_id) -> void {
+auto WINAPI re::play_sound(i32 sound_id) -> void {
   i32 resource;
 
   if (exe::opt_sound == 3) {
@@ -120,6 +121,11 @@ auto WINAPI re::play_sound(int sound_id) -> void {
     }
     PlaySound(MAKEINTRESOURCE(resource), exe::module_handle, SND_RESOURCE | SND_ASYNC);
   }
+}
+
+auto WINAPI re::rand_int(i32 bound) -> i32 {
+  auto rng = rand();
+  return rng % bound;
 }
 
 auto WINAPI re::show_error_dialog(UINT error_id) -> void {

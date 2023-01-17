@@ -22,7 +22,8 @@ auto WINAPI redraw(HDC hdc) -> void;
 auto WINAPI redraw() -> void;
 auto WINAPI modify_flag_counter(i32 amount) -> void;
 auto WINAPI stop_sounds() -> i32;
-auto WINAPI play_sound(int sound_id) -> void;
+auto WINAPI play_sound(i32 sound_id) -> void;
+auto WINAPI rand_int(i32 bound) -> i32;
 auto WINAPI show_error_dialog(UINT error_id) -> void;
 
 } // namespace re
@@ -50,6 +51,7 @@ EXE_FUNC redraw = func<void(WINAPI*)()>(0x1002af0);
 EXE_FUNC modify_flag_counter = func<void(WINAPI*)(i32)>(0x100346a);
 EXE_FUNC stop_sounds = func<i32(WINAPI*)()>(0x10038c2);
 EXE_FUNC play_sound = func<void(WINAPI*)(int)>(0x10038ed);
+EXE_FUNC rand_int = func<i32(WINAPI*)(i32)>(0x1003940);
 EXE_FUNC show_error_dialog = func<void(WINAPI*)(UINT)>(0x1003950);
 #undef EXE_FUNC
 
