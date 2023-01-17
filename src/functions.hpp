@@ -32,19 +32,21 @@ constexpr auto func(u32 address) -> Signature {
   return reinterpret_cast<Signature>(address);
 }
 
-inline const auto draw_field_h = func<void(WINAPI*)(HDC)>(0x10026a7);
-inline const auto draw_field = func<void(WINAPI*)()>(0x100272e);
-inline const auto draw_digit = func<void(WINAPI*)(HDC, i32, i32)>(0x1002752);
-inline const auto draw_flag_counter_h = func<void(WINAPI*)(HDC)>(0x1002785);
-inline const auto draw_flag_counter = func<void(WINAPI*)()>(0x1002801);
-inline const auto draw_timer_h = func<void(WINAPI*)(HDC)>(0x1002825);
-inline const auto draw_timer = func<void(WINAPI*)()>(0x10028b5);
-inline const auto draw_smiley_h = func<void(WINAPI*)(HDC, i32)>(0x10028d9);
-inline const auto draw_smiley = func<void(WINAPI*)(i32)>(0x1002913);
-inline const auto draw_borders = func<void(WINAPI*)(HDC)>(0x1002a22);
-inline const auto redraw_h = func<void(WINAPI*)(HDC)>(0x1002ac3);
-inline const auto redraw = func<void(WINAPI*)()>(0x1002af0);
-inline const auto modify_flag_counter = func<void(WINAPI*)(i32)>(0x100346a);
-inline const auto show_error_dialog = func<void(WINAPI*)(UINT)>(0x1003950);
+#define EXE_FUNC inline const auto
+EXE_FUNC draw_field_h = func<void(WINAPI*)(HDC)>(0x10026a7);
+EXE_FUNC draw_field = func<void(WINAPI*)()>(0x100272e);
+EXE_FUNC draw_digit = func<void(WINAPI*)(HDC, i32, i32)>(0x1002752);
+EXE_FUNC draw_flag_counter_h = func<void(WINAPI*)(HDC)>(0x1002785);
+EXE_FUNC draw_flag_counter = func<void(WINAPI*)()>(0x1002801);
+EXE_FUNC draw_timer_h = func<void(WINAPI*)(HDC)>(0x1002825);
+EXE_FUNC draw_timer = func<void(WINAPI*)()>(0x10028b5);
+EXE_FUNC draw_smiley_h = func<void(WINAPI*)(HDC, i32)>(0x10028d9);
+EXE_FUNC draw_smiley = func<void(WINAPI*)(i32)>(0x1002913);
+EXE_FUNC draw_borders = func<void(WINAPI*)(HDC)>(0x1002a22);
+EXE_FUNC redraw_h = func<void(WINAPI*)(HDC)>(0x1002ac3);
+EXE_FUNC redraw = func<void(WINAPI*)()>(0x1002af0);
+EXE_FUNC modify_flag_counter = func<void(WINAPI*)(i32)>(0x100346a);
+EXE_FUNC show_error_dialog = func<void(WINAPI*)(UINT)>(0x1003950);
+#undef EXE_FUNC
 
 } // namespace re::exe
