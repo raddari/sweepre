@@ -8,9 +8,9 @@
 auto WINAPI re::draw_field(HDC hdc) -> void {}
 
 auto WINAPI re::draw_field() -> void {
-  auto* hdc = GetDC(exe::app_window);
+  auto* hdc = GetDC(exe::window_handle);
   exe::draw_field_h(hdc);
-  ReleaseDC(exe::app_window, hdc);
+  ReleaseDC(exe::window_handle, hdc);
 }
 
 auto WINAPI re::draw_digit(HDC hdc, i32 xpos, i32 digit) -> void {}
@@ -38,9 +38,9 @@ auto WINAPI re::draw_flag_counter(HDC hdc) -> void {
 }
 
 auto WINAPI re::draw_flag_counter() -> void {
-  auto* hdc = GetDC(exe::app_window);
+  auto* hdc = GetDC(exe::window_handle);
   exe::draw_flag_counter_h(hdc);
-  ReleaseDC(exe::app_window, hdc);
+  ReleaseDC(exe::window_handle, hdc);
 }
 
 auto WINAPI re::draw_timer(HDC hdc) -> void {
@@ -61,17 +61,17 @@ auto WINAPI re::draw_timer(HDC hdc) -> void {
 }
 
 auto WINAPI re::draw_timer() -> void {
-  auto* hdc = GetDC(exe::app_window);
+  auto* hdc = GetDC(exe::window_handle);
   exe::draw_timer_h(hdc);
-  ReleaseDC(exe::app_window, hdc);
+  ReleaseDC(exe::window_handle, hdc);
 }
 
 auto WINAPI re::draw_smiley(HDC hdc, i32 smiley_state) -> void {}
 
 auto WINAPI re::draw_smiley(i32 smiley_state) -> void {
-  auto* hdc = GetDC(exe::app_window);
+  auto* hdc = GetDC(exe::window_handle);
   exe::draw_smiley_h(hdc, smiley_state);
-  ReleaseDC(exe::app_window, hdc);
+  ReleaseDC(exe::window_handle, hdc);
 }
 
 auto WINAPI re::draw_borders(HDC hdc) -> void {}
@@ -85,9 +85,9 @@ auto WINAPI re::redraw(HDC hdc) -> void {
 }
 
 auto WINAPI re::redraw() -> void {
-  auto* hdc = GetDC(exe::app_window);
+  auto* hdc = GetDC(exe::window_handle);
   exe::redraw_h(hdc);
-  ReleaseDC(exe::app_window, hdc);
+  ReleaseDC(exe::window_handle, hdc);
 }
 
 auto WINAPI re::modify_flag_counter(i32 amount) -> void {
@@ -100,12 +100,12 @@ auto WINAPI re::show_error_dialog(UINT error_id) -> void {
   WCHAR caption[128];
 
   if (error_id < 999) {
-    LoadString(exe::app_module, error_id & 0xffff, text, 128);
+    LoadString(exe::module_handle, error_id & 0xffff, text, 128);
   } else {
-    LoadString(exe::app_module, 6, caption, 128);
+    LoadString(exe::module_handle, 6, caption, 128);
     wsprintf(text, caption, error_id & 0xffff);
   }
 
-  LoadString(exe::app_module, 3, caption, 128);
+  LoadString(exe::module_handle, 3, caption, 128);
   MessageBox(nullptr, text, caption, MB_ICONERROR);
 }
