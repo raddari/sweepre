@@ -43,7 +43,22 @@ auto WINAPI re::draw_flag_counter() -> void {
   ReleaseDC(exe::app_window, hdc);
 }
 
-auto WINAPI re::draw_timer(HDC hdc) -> void {}
+auto WINAPI re::draw_timer(HDC hdc) -> void {
+  auto layout = GetLayout(hdc);
+  if ((layout & 1) != 0) {
+    SetLayout(hdc, 0);
+  }
+
+  auto elapsed = exe::game_timer;
+  auto tens = elapsed % 100;
+  exe::draw_digit(hdc, (exe::window_width - exe::border_width) - 56, elapsed / 100);
+  exe::draw_digit(hdc, (exe::window_width - exe::border_width) - 43, tens / 10);
+  exe::draw_digit(hdc, (exe::window_width - exe::border_width) - 30, tens % 10);
+
+  if ((layout & 1) != 0) {
+    SetLayout(hdc, layout);
+  }
+}
 
 auto WINAPI re::draw_timer() -> void {
   auto* hdc = GetDC(exe::app_window);
