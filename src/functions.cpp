@@ -3,6 +3,7 @@
 #include "globals.hpp"
 
 #include <array>
+#include <mmsystem.h>
 
 
 auto WINAPI re::draw_field(HDC hdc) -> void {}
@@ -93,6 +94,27 @@ auto WINAPI re::redraw() -> void {
 auto WINAPI re::modify_flag_counter(i32 amount) -> void {
   exe::flag_counter += amount;
   exe::draw_flag_counter();
+}
+
+auto WINAPI re::play_sound(int sound_id) -> void {
+  i32 resource;
+
+  if (exe::opt_sound == 3) {
+    switch (sound_id) {
+    case 1:
+      resource = 0x1b0;
+      break;
+    case 2:
+      resource = 0x1b1;
+      break;
+    case 3:
+      resource = 0x1b2;
+      break;
+    default:
+      return;
+    }
+    PlaySound(MAKEINTRESOURCE(resource), exe::module_handle, SND_RESOURCE | SND_ASYNC);
+  }
 }
 
 auto WINAPI re::show_error_dialog(UINT error_id) -> void {

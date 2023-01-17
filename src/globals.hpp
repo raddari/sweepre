@@ -16,6 +16,7 @@ constexpr auto global(u32 address) -> T& {
 #define EXE_REF inline auto&
 EXE_REF smiley_state = global<i32>(0x1005160);
 EXE_REF flag_counter = global<i32>(0x1005194);
+EXE_REF opt_sound = global<i32>(0x10056b8);
 EXE_REF game_timer = global<i32>(0x100579c);
 EXE_REF border_width = global<i32>(0x1005a90);
 EXE_REF window_handle = global<HWND>(0x1005b24);
