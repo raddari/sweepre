@@ -36,6 +36,7 @@ static auto apply_hooks() -> void {
   hook((u32) re::exe::redraw_h, (void(WINAPI*)(HDC)) re::redraw);
   hook((u32) re::exe::draw_flag_counter_h, (void(WINAPI*)(HDC)) re::draw_flag_counter);
   hook((u32) re::exe::draw_timer_h, (void(WINAPI*)(HDC)) re::draw_timer);
+  hook((u32) re::exe::set_hiscore, re::set_hiscore);
 }
 
 auto WINAPI DllMain(HINSTANCE hInstance, DWORD fwdReason, LPVOID lpvReserved) -> BOOL {

@@ -7,6 +7,14 @@
 #include <mmsystem.h>
 
 
+auto WINAPI re::set_hiscore(HWND hDlg, i32 dlg_index, i32 time, LPCWSTR name) -> void {
+  WCHAR text[32];
+
+  wsprintf(text, exe::hiscore_format, time);
+  SetDlgItemText(hDlg, dlg_index, text);
+  SetDlgItemText(hDlg, dlg_index + 1, name);
+}
+
 auto WINAPI re::draw_field(HDC hdc) -> void {}
 
 auto WINAPI re::draw_field() -> void {
