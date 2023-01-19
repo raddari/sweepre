@@ -1,4 +1,4 @@
-#!/bin/python3.11
+#!/usr/bin/env python3
 import sys
 
 def decompose(flags: int) -> list[int]:
