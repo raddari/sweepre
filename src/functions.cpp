@@ -110,7 +110,7 @@ auto WINAPI re::stop_sounds() -> i32 {
   return (success != 0) + 2;
 }
 
-auto WINAPI re::play_sound(i32 sound_id) -> void {
+auto WINAPI re::play_sound(UINT sound_id) -> void {
   i32 resource;
 
   if (exe::opt_sound == 3) {
@@ -149,4 +149,11 @@ auto WINAPI re::show_error_dialog(UINT error_id) -> void {
 
   LoadString(exe::module_handle, 3, caption, 128);
   MessageBox(nullptr, text, caption, MB_ICONERROR);
+}
+
+auto WINAPI re::load_string(UINT string_id, LPWSTR buffer, i32 max_size) -> void {
+  auto length = LoadString(exe::module_handle, string_id & 0xffff, buffer, max_size);
+  if (length == 0) {
+    exe::show_error_dialog(0x3e9);
+  }
 }
