@@ -105,7 +105,7 @@ auto WINAPI re::modify_flag_counter(i32 amount) -> void {
   exe::draw_flag_counter();
 }
 
-auto WINAPI re::stop_sounds() -> i32 {
+auto WINAPI re::can_play_sounds() -> i32 {
   auto success = PlaySound(nullptr, nullptr, SND_PURGE);
   return (success != 0) + 2;
 }
