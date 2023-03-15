@@ -15,6 +15,7 @@ auto WINAPI re::set_hiscore(HWND hDlg, i32 dlg_index, i32 time, LPCWSTR name) ->
   SetDlgItemText(hDlg, dlg_index + 1, name);
 }
 
+// TODO: implement
 auto WINAPI re::draw_field(HDC hdc) -> void {}
 
 auto WINAPI re::draw_field() -> void {
@@ -23,6 +24,7 @@ auto WINAPI re::draw_field() -> void {
   ReleaseDC(exe::window_handle, hdc);
 }
 
+// TODO: implement
 auto WINAPI re::draw_digit(HDC hdc, i32 xpos, i32 digit) -> void {}
 
 auto WINAPI re::draw_flag_counter(HDC hdc) -> void {
@@ -76,6 +78,7 @@ auto WINAPI re::draw_timer() -> void {
   ReleaseDC(exe::window_handle, hdc);
 }
 
+// TODO: implement
 auto WINAPI re::draw_smiley(HDC hdc, i32 smiley_state) -> void {}
 
 auto WINAPI re::draw_smiley(i32 smiley_state) -> void {
@@ -93,6 +96,7 @@ auto WINAPI re::set_pen_mode(HDC hdc, i8 white) -> void {
   }
 }
 
+// TODO: implement
 auto WINAPI re::draw_borders(HDC hdc) -> void {}
 
 auto WINAPI re::redraw(HDC hdc) -> void {
