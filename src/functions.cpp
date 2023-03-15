@@ -84,6 +84,15 @@ auto WINAPI re::draw_smiley(i32 smiley_state) -> void {
   ReleaseDC(exe::window_handle, hdc);
 }
 
+auto WINAPI re::set_pen_mode(HDC hdc, i8 white) -> void {
+  if ((white & 1) == 0) {
+    SetROP2(hdc, R2_COPYPEN);
+    SelectObject(hdc, exe::border_pen);
+  } else {
+    SetROP2(hdc, R2_WHITE);
+  }
+}
+
 auto WINAPI re::draw_borders(HDC hdc) -> void {}
 
 auto WINAPI re::redraw(HDC hdc) -> void {
