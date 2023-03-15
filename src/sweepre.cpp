@@ -38,6 +38,7 @@ static auto apply_hooks() -> void {
   hook(re::exe::set_hiscore, re::set_hiscore);
   hook(re::exe::set_pen_mode, re::set_pen_mode);
   hook(re::exe::draw_border, re::draw_border);
+  hook(re::exe::draw_borders, re::draw_borders);
 }
 
 auto WINAPI DllMain(HINSTANCE hInstance, DWORD fwdReason, LPVOID lpvReserved) -> BOOL {

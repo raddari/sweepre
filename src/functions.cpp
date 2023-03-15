@@ -123,8 +123,24 @@ auto WINAPI re::draw_border(HDC hdc, i32 x1, i32 y1, i32 x2, i32 y2, i32 thickne
   }
 }
 
-// TODO: implement
-auto WINAPI re::draw_borders(HDC hdc) -> void {}
+auto WINAPI re::draw_borders(HDC hdc) -> void {
+  auto width = exe::window_width;
+  auto height = exe::window_height;
+
+  // outside edge
+  exe::draw_border(hdc, 0, 0, width - 1, height + 1, 3, 1);
+  // playing field
+  exe::draw_border(hdc, 9, 52, width - 10, height - 10, 3, 0);
+  // status bar
+  exe::draw_border(hdc, 9, 9, width - 10, 45, 2, 0);
+  exe::draw_border(hdc, 16, 15, 56, 39, 1, 0);
+
+  auto inside_width = width - exe::border_width;
+  exe::draw_border(hdc, inside_width - 57, 15, inside_width - 17, 39, 1, 0);
+
+  width = (width - 24) / 2;
+  exe::draw_border(hdc, width - 1, 15, width + 24, 40, 1, 2);
+}
 
 auto WINAPI re::redraw(HDC hdc) -> void {
   exe::draw_borders(hdc);
