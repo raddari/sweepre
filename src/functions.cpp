@@ -96,6 +96,33 @@ auto WINAPI re::set_pen_mode(HDC hdc, i8 white) -> void {
   }
 }
 
+auto WINAPI re::draw_border(HDC hdc, i32 x1, i32 y1, i32 x2, i32 y2, i32 thickness, i32 color) -> void {
+  exe::set_pen_mode(hdc, (i8) color);
+  for (auto i = thickness; i > 0; --i) {
+    y2 -= 1;
+    MoveToEx(hdc, x1, y2, nullptr);
+    LineTo(hdc, x1, y1);
+    x1 += 1;
+    LineTo(hdc, x2, y1);
+    x2 -= 1;
+    y1 += 1;
+  }
+
+  if (color < 2) {
+    exe::set_pen_mode(hdc, (i8) color ^ 1);
+  }
+
+  for (auto i = thickness; i > 0; --i) {
+    y2 += 1;
+    MoveToEx(hdc, x1, y2, nullptr);
+    x1 -= 1;
+    x2 += 1;
+    LineTo(hdc, x2, y2);
+    y1 -= 1;
+    LineTo(hdc, x2, y1);
+  }
+}
+
 // TODO: implement
 auto WINAPI re::draw_borders(HDC hdc) -> void {}
 
