@@ -63,9 +63,10 @@ auto WINAPI re::draw_timer(HDC hdc) -> void {
 
   auto elapsed = exe::game_timer;
   auto tens = elapsed % 100;
-  exe::draw_digit(hdc, (exe::window_width - exe::border_width) - 56, elapsed / 100);
-  exe::draw_digit(hdc, (exe::window_width - exe::border_width) - 43, tens / 10);
-  exe::draw_digit(hdc, (exe::window_width - exe::border_width) - 30, tens % 10);
+  auto inside_width = exe::window_width - exe::border_width;
+  exe::draw_digit(hdc, inside_width - 56, elapsed / 100);
+  exe::draw_digit(hdc, inside_width - 43, tens / 10);
+  exe::draw_digit(hdc, inside_width - 30, tens % 10);
 
   if ((layout & 1) != 0) {
     SetLayout(hdc, layout);
