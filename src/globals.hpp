@@ -13,21 +13,23 @@ constexpr auto global(u32 address) -> T& {
   return *reinterpret_cast<T*>(address);
 }
 
-#define EXE_REF inline auto&
-EXE_REF border_pen = global<HPEN>(0x1005158);
-EXE_REF smiley_state = global<i32>(0x1005160);
-EXE_REF flag_counter = global<i32>(0x1005194);
-EXE_REF opt_sound = global<i32>(0x10056b8);
-EXE_REF beginner_hiscore = global<i32>(0x10056cc);
-EXE_REF intermediate_hiscore = global<i32>(0x10056d0);
-EXE_REF expert_hiscore = global<i32>(0x10056d4);
-EXE_REF game_timer = global<i32>(0x100579c);
-EXE_REF border_width = global<i32>(0x1005a90);
-EXE_REF hiscore_format = global<WCHAR[32]>(0x1005ae0);
-EXE_REF window_height = global<i32>(0x1005b20);
-EXE_REF window_handle = global<HWND>(0x1005b24);
-EXE_REF window_width = global<i32>(0x01005b2c);
-EXE_REF module_handle = global<HMODULE>(0x1005b30);
+#define EXE_REF(address, ident, type) inline auto& ident = global<type>((address))
+
+EXE_REF(0x1005158, border_pen, HPEN);
+EXE_REF(0x1005160, smiley_state, i32);
+EXE_REF(0x1005194, flag_counter, i32);
+EXE_REF(0x10056b8, opt_sound, i32);
+EXE_REF(0x10056cc, beginner_hiscore, i32);
+EXE_REF(0x10056d0, intermediate_hiscore, i32);
+EXE_REF(0x10056d4, expert_hiscore, i32);
+EXE_REF(0x100579c, game_timer, i32);
+EXE_REF(0x1005a90, border_width, i32);
+EXE_REF(0x1005ae0, hiscore_format, WCHAR[32]);
+EXE_REF(0x1005b20, window_height, i32);
+EXE_REF(0x1005b24, window_handle, HWND);
+EXE_REF(0x1005b2c, window_width, i32);
+EXE_REF(0x1005b30, module_handle, HMODULE);
+
 #undef EXE_REF
 
 } // namespace re::exe
