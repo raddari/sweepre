@@ -2,7 +2,6 @@
 
 #include "globals.hpp"
 
-#include <array>
 #include <cstdlib>
 #include <mmsystem.h>
 
