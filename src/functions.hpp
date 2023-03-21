@@ -35,32 +35,35 @@ auto WINAPI load_string(UINT string_id, LPWSTR buffer, i32 max_size) -> void;
 namespace re::exe {
 
 template <class Signature>
-constexpr auto func(u32 address) -> Signature {
+  requires std::is_pointer_v<Signature>
+constexpr inline auto func(u32 address) -> Signature {
   return reinterpret_cast<Signature>(address);
 }
 
-#define EXE_FUNC inline const auto
-EXE_FUNC set_hiscore = func<void(WINAPI*)(HWND, i32, i32, LPCWSTR)>(0x10016ba);
-EXE_FUNC draw_field_h = func<void(WINAPI*)(HDC)>(0x10026a7);
-EXE_FUNC draw_field = func<void(WINAPI*)()>(0x100272e);
-EXE_FUNC draw_digit = func<void(WINAPI*)(HDC, i32, i32)>(0x1002752);
-EXE_FUNC draw_flag_counter_h = func<void(WINAPI*)(HDC)>(0x1002785);
-EXE_FUNC draw_flag_counter = func<void(WINAPI*)()>(0x1002801);
-EXE_FUNC draw_timer_h = func<void(WINAPI*)(HDC)>(0x1002825);
-EXE_FUNC draw_timer = func<void(WINAPI*)()>(0x10028b5);
-EXE_FUNC draw_smiley_h = func<void(WINAPI*)(HDC, i32)>(0x10028d9);
-EXE_FUNC draw_smiley = func<void(WINAPI*)(i32)>(0x1002913);
-EXE_FUNC set_pen_mode = func<void(WINAPI*)(HDC, i8)>(0x100293d);
-EXE_FUNC draw_border = func<void(WINAPI*)(HDC, i32, i32, i32, i32, i32, i32)>(0x1002971);
-EXE_FUNC draw_borders = func<void(WINAPI*)(HDC)>(0x1002a22);
-EXE_FUNC redraw_h = func<void(WINAPI*)(HDC)>(0x1002ac3);
-EXE_FUNC redraw = func<void(WINAPI*)()>(0x1002af0);
-EXE_FUNC modify_flag_counter = func<void(WINAPI*)(i32)>(0x100346a);
-EXE_FUNC can_play_sounds = func<i32(WINAPI*)()>(0x10038c2);
-EXE_FUNC play_sound = func<void(WINAPI*)(UINT)>(0x10038ed);
-EXE_FUNC rand_int = func<i32(WINAPI*)(i32)>(0x1003940);
-EXE_FUNC show_error_dialog = func<void(WINAPI*)(UINT)>(0x1003950);
-EXE_FUNC load_string = func<void(WINAPI*)(UINT, LPWSTR, i32)>(0x10039e7);
+#define EXE_FUNC(address, ident, signature) inline const auto ident = func<signature>((address))
+
+EXE_FUNC(0x10016ba, set_hiscore, void(WINAPI*)(HWND, i32, i32, LPCWSTR));
+EXE_FUNC(0x10026a7, draw_field_h, void(WINAPI*)(HDC));
+EXE_FUNC(0x100272e, draw_field, void(WINAPI*)());
+EXE_FUNC(0x1002752, draw_digit, void(WINAPI*)(HDC, i32, i32));
+EXE_FUNC(0x1002785, draw_flag_counter_h, void(WINAPI*)(HDC));
+EXE_FUNC(0x1002801, draw_flag_counter, void(WINAPI*)());
+EXE_FUNC(0x1002825, draw_timer_h, void(WINAPI*)(HDC));
+EXE_FUNC(0x10028b5, draw_timer, void(WINAPI*)());
+EXE_FUNC(0x10028d9, draw_smiley_h, void(WINAPI*)(HDC, i32));
+EXE_FUNC(0x1002913, draw_smiley, void(WINAPI*)(i32));
+EXE_FUNC(0x100293d, set_pen_mode, void(WINAPI*)(HDC, i8));
+EXE_FUNC(0x1002971, draw_border, void(WINAPI*)(HDC, i32, i32, i32, i32, i32, i32));
+EXE_FUNC(0x1002a22, draw_borders, void(WINAPI*)(HDC));
+EXE_FUNC(0x1002ac3, redraw_h, void(WINAPI*)(HDC));
+EXE_FUNC(0x1002af0, redraw, void(WINAPI*)());
+EXE_FUNC(0x100346a, modify_flag_counter, void(WINAPI*)(i32));
+EXE_FUNC(0x10038c2, can_play_sounds, i32(WINAPI*)());
+EXE_FUNC(0x10038ed, play_sound, void(WINAPI*)(UINT));
+EXE_FUNC(0x1003940, rand_int, i32(WINAPI*)(i32));
+EXE_FUNC(0x1003950, show_error_dialog, void(WINAPI*)(UINT));
+EXE_FUNC(0x10039e7, load_string, void(WINAPI*)(UINT, LPWSTR, i32));
+
 #undef EXE_FUNC
 
 } // namespace re::exe
