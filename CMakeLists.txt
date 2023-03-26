@@ -10,7 +10,14 @@ target_compile_definitions(${DLL_HOOK_LIB} PUBLIC
   WIN32_LEAN_AND_MEAN
 )
 
-install(TARGETS ${DLL_HOOK_LIB}
+set(SWEEPRE_EXE ${PROJECT_NAME})
+add_executable(${SWEEPRE_EXE} WIN32)
+target_compile_definitions(${SWEEPRE_EXE} PUBLIC
+  UNICODE
+  WIN32_LEAN_AND_MEAN
+)
+
+install(TARGETS ${DLL_HOOK_LIB} ${SWEEPRE_EXE}
   RUNTIME DESTINATION "."
 )
 

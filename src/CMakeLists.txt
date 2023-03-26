@@ -7,3 +7,7 @@ target_sources(${DLL_HOOK_LIB} PRIVATE
   retypes.hpp
   sweepre.cpp
 )
+
+target_sources(${SWEEPRE_EXE} PRIVATE
+  main.cpp
+)
