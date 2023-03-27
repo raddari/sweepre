@@ -8,6 +8,7 @@ add_library(${DLL_HOOK_LIB} SHARED)
 target_compile_definitions(${DLL_HOOK_LIB} PUBLIC
   UNICODE
   WIN32_LEAN_AND_MEAN
+  NOMINMAX
 )
 
 set(SWEEPRE_EXE ${PROJECT_NAME})
@@ -15,6 +16,7 @@ add_executable(${SWEEPRE_EXE} WIN32)
 target_compile_definitions(${SWEEPRE_EXE} PUBLIC
   UNICODE
   WIN32_LEAN_AND_MEAN
+  NOMINMAX
 )
 
 install(TARGETS ${DLL_HOOK_LIB} ${SWEEPRE_EXE}
