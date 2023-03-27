@@ -11,6 +11,10 @@ target_compile_definitions(${DLL_HOOK_LIB} PUBLIC
     NOMINMAX
     )
 
+target_compile_features(${DLL_HOOK_LIB} PRIVATE
+    cxx_std_20
+    )
+
 install(TARGETS ${DLL_HOOK_LIB}
     RUNTIME DESTINATION "."
     )
