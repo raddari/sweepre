@@ -23,6 +23,7 @@ auto WINAPI draw_border(HDC hdc, i32 x1, i32 y1, i32 x2, i32 y2, i32 thickness, 
 auto WINAPI draw_borders(HDC hdc) -> void;
 auto WINAPI redraw(HDC hdc) -> void;
 auto WINAPI redraw() -> void;
+auto WINAPI tile_value(i32 col, i32 row) -> i32;
 auto WINAPI modify_flag_counter(i32 amount) -> void;
 auto WINAPI can_play_sounds() -> i32;
 auto WINAPI play_sound(UINT sound_id) -> void;
@@ -57,6 +58,7 @@ EXE_FUNC(0x1002971, draw_border, void WINAPI(HDC, i32, i32, i32, i32, i32, i32))
 EXE_FUNC(0x1002a22, draw_borders, void WINAPI(HDC));
 EXE_FUNC(0x1002ac3, redraw_h, void WINAPI(HDC));
 EXE_FUNC(0x1002af0, redraw, void WINAPI());
+EXE_FUNC(0x1002f3b, tile_value, i32 WINAPI(i32, i32));
 EXE_FUNC(0x100346a, modify_flag_counter, void WINAPI(i32));
 EXE_FUNC(0x10038c2, can_play_sounds, i32 WINAPI());
 EXE_FUNC(0x10038ed, play_sound, void WINAPI(UINT));

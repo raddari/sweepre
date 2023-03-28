@@ -2,6 +2,7 @@
 
 #include "globals.hpp"
 
+#include <algorithm>
 #include <cstdlib>
 #include <mmsystem.h>
 
@@ -154,6 +155,27 @@ auto WINAPI re::redraw() -> void {
   auto* hdc = GetDC(exe::window_handle);
   exe::redraw_h(hdc);
   ReleaseDC(exe::window_handle, hdc);
+}
+
+auto WINAPI re::tile_value(i32 col, i32 row) -> i32 {
+  i32 value = 0;
+
+  // col and row index begin at 1
+  auto min_row = std::max(0, row - 1);
+  auto max_row = row + 1;
+  auto min_col = std::max(0, col - 1);
+  auto max_col = col + 1;
+
+  for (auto r = min_row; r <= max_row; ++r) {
+    for (auto c = min_col; c <= max_col; ++c) {
+      auto tile = exe::minefield[r * 32 + c];
+      if ((tile & 0x80) != 0) {
+        value += 1;
+      }
+    }
+  }
+
+  return value;
 }
 
 auto WINAPI re::modify_flag_counter(i32 amount) -> void {
