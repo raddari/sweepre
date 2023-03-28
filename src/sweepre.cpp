@@ -2,12 +2,13 @@
 #include "retypes.hpp"
 
 #include <cstdio>
+#include <format>
 #include <iostream>
 #include <windows.h>
 
 
-template <typename Address, typename HookFn>
-auto hook_function(Address target, HookFn replacement) -> bool {
+template <class Address, class HookFn>
+auto apply_hook(Address target, HookFn replacement) -> bool {
 #pragma pack(push, 1)
   struct HookLayout {
     const u8 jmp{0xe9};
@@ -16,18 +17,17 @@ auto hook_function(Address target, HookFn replacement) -> bool {
 #pragma pack(pop, 1)
   static_assert(sizeof(HookLayout) == 5, "Hook struct not packed");
 
-  auto fn_start{replacement - target - 5};
-  auto hook = HookLayout{.address{fn_start}};
+  auto hook = HookLayout{.address{(u32) replacement - (u32) target - 5}};
   auto* handle = GetCurrentProcess();
-  return WriteProcessMemory(handle, reinterpret_cast<LPVOID>(target), &hook, sizeof(hook), nullptr);
+  return WriteProcessMemory(handle, (LPVOID) target, &hook, sizeof(hook), nullptr);
 }
 
 static auto apply_hooks() -> void {
   auto hook = [](auto address, auto replacement) -> void {
-    if (hook_function((u32) address, (u32) replacement)) {
-      std::printf("$ function hooked: %#08x =>> %#08x\n", (u32) address, reinterpret_cast<u32>(replacement));
+    if (apply_hook(address, replacement)) {
+      std::cout << std::format("$ hooked fn: 0x{:08x} =>> 0x{:08x}\n", (u32) address, (u32) replacement);
     } else {
-      std::printf("! hook failed: %#08x\n", (u32) address);
+      std::cout << std::format("! hook failed: 0x{:08x}\n", (u32) address);
     }
   };
 
