@@ -34,8 +34,10 @@ auto WINAPI re::draw_field() -> void {
   ReleaseDC(exe::window_handle, hdc);
 }
 
-// TODO: implement
-auto WINAPI re::draw_digit(HDC hdc, i32 xpos, i32 digit) -> void {}
+auto WINAPI re::draw_digit(HDC hdc, i32 xpos, i32 digit) -> void {
+  auto* bits = (u8*) exe::digit_bmpinfo + exe::digit_bmps[digit];
+  SetDIBitsToDevice(hdc, xpos, 16, 13, 23, 0, 0, 0, 23, bits, exe::digit_bmpinfo, DIB_RGB_COLORS);
+}
 
 auto WINAPI re::draw_flag_counter(HDC hdc) -> void {
   auto layout = GetLayout(hdc);

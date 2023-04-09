@@ -29,7 +29,10 @@ EXE_REF(0x10056cc, beginner_hiscore, i32);
 EXE_REF(0x10056d0, intermediate_hiscore, i32);
 EXE_REF(0x10056d4, expert_hiscore, i32);
 EXE_REF(0x100579c, game_timer, i32);
+EXE_REF(0x100595c, digit_bmpinfo, BITMAPINFO*);
 EXE_REF(0x1005a20, tile_bmps, HDC[16]);
+// Each element is an offset into #digit_bmpinfo specifying the start of the digit's color table
+EXE_REF(0x1005a60, digit_bmps, i32[12]);
 EXE_REF(0x1005a90, border_width, i32);
 EXE_REF(0x1005ae0, hiscore_format, WCHAR[32]);
 EXE_REF(0x1005b20, window_height, i32);
