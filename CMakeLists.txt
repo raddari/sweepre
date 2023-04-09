@@ -12,7 +12,7 @@ target_compile_definitions(${DLL_HOOK_LIB} PUBLIC
     )
 
 target_compile_features(${DLL_HOOK_LIB} PRIVATE
-    cxx_std_20
+    cxx_std_23
     )
 
 install(TARGETS ${DLL_HOOK_LIB}
