@@ -7,6 +7,8 @@
 #include <windows.h>
 
 
+namespace {
+
 template <class Address, class HookFn>
 auto apply_hook(Address target, HookFn replacement) -> bool {
 #pragma pack(push, 1)
@@ -22,7 +24,7 @@ auto apply_hook(Address target, HookFn replacement) -> bool {
   return WriteProcessMemory(handle, (LPVOID) target, &hook, sizeof(hook), nullptr);
 }
 
-static auto apply_hooks() -> void {
+auto apply_hooks() -> void {
   auto hook = [](auto address, auto replacement) -> void {
     if (apply_hook(address, replacement)) {
       std::cout << std::format("$ hooked fn: 0x{:08x} =>> 0x{:08x}\n", (u32) address, (u32) replacement);
@@ -45,6 +47,8 @@ static auto apply_hooks() -> void {
   hook(re::exe::draw_tile, re::draw_tile);
   hook(re::exe::tile_value, re::tile_value);
 }
+
+} // namespace
 
 auto WINAPI DllMain(HINSTANCE hInstance, DWORD fwdReason, LPVOID lpvReserved) -> BOOL {
   switch (fwdReason) {
