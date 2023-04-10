@@ -36,6 +36,7 @@ static auto apply_hooks() -> void {
   hook(re::exe::draw_flag_counter_h, (void(WINAPI*)(HDC)) re::draw_flag_counter);
   hook(re::exe::draw_timer_h, (void(WINAPI*)(HDC)) re::draw_timer);
   hook(re::exe::draw_field_h, (void(WINAPI*)(HDC)) re::draw_field);
+  hook(re::exe::draw_smiley_h, (void(WINAPI*)(HDC, i32)) re::draw_smiley);
   hook(re::exe::draw_digit, re::draw_digit);
   hook(re::exe::set_hiscore, re::set_hiscore);
   hook(re::exe::set_pen_mode, re::set_pen_mode);

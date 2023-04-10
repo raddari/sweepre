@@ -30,6 +30,9 @@ EXE_REF(0x10056d0, intermediate_hiscore, i32);
 EXE_REF(0x10056d4, expert_hiscore, i32);
 EXE_REF(0x100579c, game_timer, i32);
 EXE_REF(0x100595c, digit_bmpinfo, BITMAPINFO*);
+// Each element is an offset into #smiley_bmpinfo specifying the start of the digit's color table
+EXE_REF(0x1005960, smiley_bmps, i32[5]);
+EXE_REF(0x1005a00, smiley_bmpinfo, BITMAPINFO*);
 EXE_REF(0x1005a20, tile_bmps, HDC[16]);
 // Each element is an offset into #digit_bmpinfo specifying the start of the digit's color table
 EXE_REF(0x1005a60, digit_bmps, i32[12]);

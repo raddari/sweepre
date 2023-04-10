@@ -91,8 +91,11 @@ auto WINAPI re::draw_timer() -> void {
   ReleaseDC(exe::window_handle, hdc);
 }
 
-// TODO: implement
-auto WINAPI re::draw_smiley(HDC hdc, i32 smiley_state) -> void {}
+auto WINAPI re::draw_smiley(HDC hdc, i32 smiley_state) -> void {
+  auto x = (exe::window_width - 24) / 2;
+  auto* bits = (u8*) exe::smiley_bmpinfo + exe::smiley_bmps[smiley_state];
+  SetDIBitsToDevice(hdc, x, 16, 24, 24, 0, 0, 0, 24, bits, exe::smiley_bmpinfo, DIB_RGB_COLORS);
+}
 
 auto WINAPI re::draw_smiley(i32 smiley_state) -> void {
   auto* hdc = GetDC(exe::window_handle);
