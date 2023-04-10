@@ -42,6 +42,7 @@ static auto apply_hooks() -> void {
   hook(re::exe::set_pen_mode, re::set_pen_mode);
   hook(re::exe::draw_border, re::draw_border);
   hook(re::exe::draw_borders, re::draw_borders);
+  hook(re::exe::draw_tile, re::draw_tile);
   hook(re::exe::tile_value, re::tile_value);
 }
 

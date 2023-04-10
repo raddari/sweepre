@@ -15,6 +15,13 @@ auto WINAPI re::set_hiscore(HWND hDlg, i32 dlg_index, i32 time, LPCWSTR name) ->
   SetDlgItemText(hDlg, dlg_index + 1, name);
 }
 
+auto WINAPI re::draw_tile(i32 col, i32 row) -> void {
+  auto* hdc = GetDC(exe::window_handle);
+  auto tile_value = exe::minefield[row * 32 + col] & 0x1f;
+  BitBlt(hdc, col * 16 - 5, row * 16 + 39, 16, 16, exe::tile_bmps[tile_value], 0, 0, SRCCOPY);
+  ReleaseDC(exe::window_handle, hdc);
+}
+
 auto WINAPI re::draw_field(HDC hdc) -> void {
   auto y = 55;
   for (auto row = 1; row <= exe::field_height; ++row) {

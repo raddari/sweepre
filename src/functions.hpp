@@ -9,6 +9,7 @@
 namespace re {
 
 auto WINAPI set_hiscore(HWND hDlg, i32 dlg_index, i32 time, LPCWSTR name) -> void;
+auto WINAPI draw_tile(i32 col, i32 row) -> void;
 auto WINAPI draw_field(HDC hdc) -> void;
 auto WINAPI draw_field() -> void;
 auto WINAPI draw_digit(HDC hdc, i32 xpos, i32 digit) -> void;
@@ -44,6 +45,7 @@ constexpr inline auto func(u32 address) -> FuncPtr {
 #define EXE_FUNC(address, ident, signature) inline const auto ident = func<signature>((address))
 
 EXE_FUNC(0x10016ba, set_hiscore, void WINAPI(HWND, i32, i32, LPCWSTR));
+EXE_FUNC(0x1002646, draw_tile, void WINAPI(i32, i32));
 EXE_FUNC(0x10026a7, draw_field_h, void WINAPI(HDC));
 EXE_FUNC(0x100272e, draw_field, void WINAPI());
 EXE_FUNC(0x1002752, draw_digit, void WINAPI(HDC, i32, i32));
